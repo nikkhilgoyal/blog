@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block blogactive %} active {% endblock blogactive%}
+{% block title %} Search Results {% endblock title%}
+{% block body %}
+<div class="container">
+    <h2>Search Results:</h2>
+    {% if allPost|length < 1 %}
+    <div class="container" mx-19>
+    <h4>Search did not match</h4>
+    <h5>Try different keywords</h5>
+     </div>
+    {%endif%}
+{% for post in allPost %}
+ <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 mt-3 position-relative">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary">{{post.author}}</strong>
+          <h3 class="mb-0">{{post.title}}</h3>
+          <p class="card-text mb-auto mt-1">{{post.content| truncatechars:400 }}</p>
+          <a href="/blogs/{{post.slug}}" role="button" class="btn btn-primary">Continue reading</a>
+        </div>
+        <div class="col-auto d-none d-lg-block">
+        </div>
+      </div>
+{% endfor %}
+
+</div>
+{% endblock body%}
+
