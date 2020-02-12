@@ -9,7 +9,6 @@ class Post(models.Model):
     author = models.CharField(max_length=70)
     slug = models.CharField(max_length=80)
     content = RichTextUploadingField()
-    timeStamp = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return self.title

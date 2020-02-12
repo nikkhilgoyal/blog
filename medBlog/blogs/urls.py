@@ -21,4 +21,5 @@ urlpatterns = [
     path('writeblog',views.writeBlog, name = 'writeBlog'),
     path('addblog',views.addBlog, name = 'addBlog'),
     path('ckeditor',include("ckeditor_uploader.urls")),
+    path('query',views.query),
 ]

@@ -1,7 +1,10 @@
 from django.shortcuts import render, HttpResponse, redirect
 from blogs.models import Post
+from .elas import myRequest
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 # Create your views here.
+import requests
 
 def blogHome(request):
     allPosts = Post.objects.all()
@@ -12,10 +15,6 @@ def blogHome(request):
     return render(request, "blog/blog.html", context)
 
 
-def blogPost(request, slug):
-    post = Post.objects.filter(slug=slug).first()
-    context = {'post': post}
-    return render(request, 'blog/blogPost.html', context)
 def writeBlog(request):
     return render(request, 'blog/newBlog.html')
 
@@ -30,3 +29,30 @@ def addBlog(request):
         return redirect('/blogs')
     else:
         return redirect('home')
+
+
+
+#def blogPost(request, slug):
+#    post = Post.objects.filter(slug=slug).first()
+#    context = {'post': post}
+#    return render(request, 'blog/blogPost.html', context)
+
+def blogPost(request, slug):
+    post = myRequest(slug)
+    contex = {'post':post}
+    print("b.p === ",post)
+
+    #post = Post.objects.filter(slug=slug).first()
+    return render(request, 'blog/blogPost.html', contex)
+def query(request):
+    x = myRequest(request.GET['query'])
+    contex = {'x':x}
+
+    print(type(x))
+    #print(type(contex["jso"]))
+    #print(x[0]['content'])
+    return render(request,'blog/query.html',contex)
+    #return HttpResponse((contex["jso"]))
+    #return render(request,'blog/query.html',contex)
+    #return JsonResponse(x, safe=False),x
+

@@ -85,8 +85,12 @@
     </div>
   </div>
 </div>
+{% if user.is_authenticated %}
+
  <form method="post" action="/follow/">{% csrf_token %}
           <input type="text" name="follow" placeholder="Author or Username">
    <button type="submit"> follow</button>
         </form>
+
+{% endif %}
 {% endblock body%}
